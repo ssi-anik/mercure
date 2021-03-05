@@ -43,7 +43,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-lowest --prefer-dist --no-progress --no-suggest --no-interaction
+        run: composer install --prefer-dist --no-progress --no-suggest --no-interaction
 
       - name: Run test suite
         run: ./vendor/bin/phpunit --testdox --verbose
