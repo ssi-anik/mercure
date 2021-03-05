@@ -121,7 +121,7 @@ class PublisherFactoryTest extends TestCase
         Publisher::instance($config)(new Update([]));
     }
 
-    public function testFactoryUseAlgoWhenGeneratesJWT()
+    public function testFactoryUseAlgoWhenGeneratesJwt()
     {
         $config = $this->config();
         $config['algo'] = 'HS512';
