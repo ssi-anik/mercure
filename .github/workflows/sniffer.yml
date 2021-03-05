@@ -1,13 +1,10 @@
 name: Code sniffer
 on:
+  pull_request:
   push:
     branches:
-      - master
       - main
-  pull_request:
-    branches:
-      - master
-      - main
+
 jobs:
   sniff:
     name: Sniff codebase
