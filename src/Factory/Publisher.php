@@ -16,6 +16,7 @@ final class Publisher
 {
     private function __construct()
     {
+        
     }
 
     /**
