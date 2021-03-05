@@ -42,7 +42,8 @@ jobs:
           restore-keys: dependencies-${{ runner.os }}-php-${{ matrix.php }}-composer-
 
       - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
+        # Disabling cache until the codebase is frozen
+        # if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest --no-interaction
 
       - name: Run test suite
