@@ -1,15 +1,33 @@
 {
-    "name": "anik/laravel-mercure",
-    "description": "Mercure implementation for Laravel/Lumen to publish messages to the Mercure hub including Laravel Event Broadcasting & Laravel Notification",
+    "name": "anik/mercure",
+    "description": "dunglas/mercure publisher implementation for any PHP-based application. Publish messages to the Mercure hub with Laravel Event Broadcasting & Laravel Notifications.",
     "type": "library",
+    "keywords": [
+        "dunglas-mercure",
+        "mercure",
+        "protocol",
+        "laravel-mercure",
+        "lumen-mercure",
+        "php-mercure",
+        "laravel",
+        "lumen",
+        "events",
+        "broadcasting",
+        "broadcaster",
+        "notifications",
+        "SSE",
+        "Server-Sent Events"
+    ],
+    "homepage": "https://github.com/ssi-anik/mercure",
+    "license": "MIT",
     "authors": [
         {
             "name": "Syed Sirajul Islam Anik",
-            "email": "sirajul.islam.anik@gmail.com"
+            "email": "sirajul.islam.anik@gmail.com",
+            "homepage": "https://github.com/ssi-anik",
+            "role": "Developer"
         }
     ],
-    "license": "MIT",
-    "minimum-stability": "stable",
     "require": {
         "php": "^7.2|^8.0",
         "symfony/mercure": "~0.4.1",
@@ -30,6 +48,8 @@
         }
     },
     "scripts": {
-        "sniff": "./vendor/bin/phpcs --standard=PSR12 ./src"
-    }
+        "sniff": "./vendor/bin/phpcs --standard=PSR12 ./src",
+        "test": "./vendor/bin/phpunit --testdox --verbose"
+    },
+    "minimum-stability": "stable"
 }

@@ -34,9 +34,7 @@ final class Publisher
             $jwtProvider = $config['provider'];
         } elseif (isset($config['secret']) && isset($config['payload'])) {
             $algo = $config['algo'] ?? 'HS256';
-            $jwtProvider = new StaticJwtProvider(
-                JWT::encode($config['payload'], $config['secret'], $algo)
-            );
+            $jwtProvider = new StaticJwtProvider(JWT::encode($config['payload'], $config['secret'], $algo));
         } else {
             throw new MercureException(
                 'Value missing in configuration. Configuration must have jwt or provider or secret and payload.'
