@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Anik\Mercure\Adapter;
 
 use Illuminate\Support\Arr;

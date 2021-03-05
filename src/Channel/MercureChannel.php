@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Anik\Mercure\Channel;
 
 use Anik\Mercure\Adapter\Mercure;
