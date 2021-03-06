@@ -39,8 +39,7 @@ class PublisherTest extends TestCase
 
     public function testFactoryUsesHttpClient()
     {
-        $config = $this->configWithHttpClient(function () {
-        }, 'id');
+        $config = $this->configWithHttpClient(null, 'id');
 
         $response = Publisher::instance($config)(new Update([]));
         $this->assertSame($response, 'id');
