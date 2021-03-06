@@ -8,7 +8,7 @@ return [
 
     'connections' => [
         'hub' => [
-            'url' => env('MERCURE_PUBLISH_HUB_URL', 'http://127.0.0.1:9000/.well-known/mercure'),
+            'url' => env('MERCURE_PUBLISH_HUB_URL', 'http://127.0.0.1:3000/.well-known/mercure'),
             'jwt' => env('MERCURE_PUBLISH_JWT'),
         ],
     ],

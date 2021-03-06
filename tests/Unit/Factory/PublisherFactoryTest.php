@@ -15,7 +15,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class PublisherFactoryTest extends TestCase
 {
-    public const URL = 'http://127.0.0.1:9000/.well-known/mercure';
+    public const URL = 'http://127.0.0.1:3000/.well-known/mercure';
     public const JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.OwYVEF9qsVOpHeCx-iBV5jMVl0BVGivm0v8fsJTW5rw';
     public const ANOTHER_JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfSwiZXh0cmFfZGF0YSI6ImhlcmUifQ.bcEXNZ5sfW5WXWs7ekkMFI540X5UELrOi9tgav3eE3Q';
     public const SECRET = 'secret';
