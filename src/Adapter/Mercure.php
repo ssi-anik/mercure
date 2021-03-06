@@ -53,7 +53,7 @@ class Mercure
      * @param $event
      * @param array $payload
      *
-     * @return string|bool
+     * @return null|string|bool
      */
     public function publishGracefully(array $channels, $event, array $payload = [])
     {
