@@ -29,7 +29,7 @@ class Mercure
     public function publish(array $channels, string $event, array $payload = []): ?string
     {
         if (empty($channels)) {
-            return;
+            return null;
         }
 
         $topics = array_map(function ($channel) {
