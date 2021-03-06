@@ -2,9 +2,11 @@
 
 namespace Anik\Mercure\Tests;
 
+use Anik\Mercure\Adapter\Mercure;
 use Anik\Mercure\Provider\MercureServiceProvider;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
+use Symfony\Component\Mercure\PublisherInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class TestCase extends \Orchestra\Testbench\TestCase
@@ -46,7 +48,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
         return array_merge($config, $options['set'] ?? []);
     }
 
-    protected function getMockedHttpClient(callable $callback, string $response = ''): MockHttpClient
+    protected function getMockedHttpClient(callable $callback = null, string $response = ''): MockHttpClient
     {
         return new MockHttpClient(function (
             string $method,
@@ -56,13 +58,13 @@ class TestCase extends \Orchestra\Testbench\TestCase
             $callback,
             $response
         ): ResponseInterface {
-            call_user_func_array($callback, [$method, $url, $options]);
+            $callback ? call_user_func_array($callback, [$method, $url, $options]) : null;
 
             return new MockResponse($response);
         });
     }
 
-    protected function configWithHttpClient(callable $callback, string $response = '', array $options = []): array
+    protected function configWithHttpClient(callable $callback = null, string $response = '', array $options = []): array
     {
         $httpClient = $this->getMockedHttpClient($callback, $response);
 
@@ -71,5 +73,22 @@ class TestCase extends \Orchestra\Testbench\TestCase
                 'http_client' => $httpClient,
             ],
         ], $options));
+    }
+
+    protected function mockHttpClientInConnection(callable $callback = null, string $response = '', string $connection = 'hub')
+    {
+        config([
+            "mercure.connections.{$connection}.http_client" => $this->getMockedHttpClient($callback, $response),
+        ]);
+    }
+
+    protected function getPublisherContract(): PublisherInterface
+    {
+        return app(PublisherInterface::class);
+    }
+
+    protected function getMercureAdapter(): Mercure
+    {
+        return new Mercure($this->getPublisherContract());
     }
 }
