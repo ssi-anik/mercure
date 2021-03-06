@@ -1,6 +1,6 @@
 <?php
 
-namespace Unit\Factory;
+namespace Anik\Mercure\Tests\Unit\Factory;
 
 use Anik\Mercure\Exception\MercureException;
 use Anik\Mercure\Factory\Publisher;
@@ -13,7 +13,7 @@ use Symfony\Component\Mercure\PublisherInterface;
 use Symfony\Component\Mercure\Update;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-class PublisherFactoryTest extends TestCase
+class PublisherTest extends TestCase
 {
     public const URL = 'http://127.0.0.1:3000/.well-known/mercure';
     public const JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.OwYVEF9qsVOpHeCx-iBV5jMVl0BVGivm0v8fsJTW5rw';
@@ -46,7 +46,7 @@ class PublisherFactoryTest extends TestCase
         $this->assertTrue($publisher instanceof MercurePublisher);
     }
 
-    public function testShouldReceiveExceptionForNoUrl()
+    public function testShouldThrowExceptionForNoUrl()
     {
         $config = $this->config();
         unset($config['url']);
@@ -54,7 +54,7 @@ class PublisherFactoryTest extends TestCase
         Publisher::instance($config);
     }
 
-    public function testShouldReceiveExceptionForNoJwtOrProviderOrSecretAndPayload()
+    public function testShouldThrowExceptionForNoJwtOrProviderOrSecretAndPayload()
     {
         $config1 = $config2 = $this->config();
         unset($config1['secret'], $config1['jwt']);
