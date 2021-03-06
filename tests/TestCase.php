@@ -64,8 +64,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
         });
     }
 
-    protected function configWithHttpClient(callable $callback = null, string $response = '', array $options = []): array
-    {
+    protected function configWithHttpClient(
+        callable $callback = null,
+        string $response = '',
+        array $options = []
+    ): array {
         $httpClient = $this->getMockedHttpClient($callback, $response);
 
         return $this->config(array_merge_recursive([
@@ -75,11 +78,18 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ], $options));
     }
 
-    protected function mockHttpClientInConnection(callable $callback = null, string $response = '', string $connection = 'hub')
+    protected function mockHttpClientInConnection(
+        callable $callback = null,
+        string $response = '',
+        string $connection = 'hub'
+    ) {
+        $key = "connections.{$connection}.http_client";
+        $this->updateConfiguration($key, $this->getMockedHttpClient($callback, $response));
+    }
+
+    protected function updateConfiguration($key, $value)
     {
-        config([
-            "mercure.connections.{$connection}.http_client" => $this->getMockedHttpClient($callback, $response),
-        ]);
+        config(["mercure.{$key}" => $value]);
     }
 
     protected function getPublisherContract(): PublisherInterface

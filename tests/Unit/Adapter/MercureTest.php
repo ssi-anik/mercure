@@ -112,4 +112,10 @@ class MercureTest extends TestCase
         });
         $this->getMercureAdapter()->publish(['channel'], 'event', ['__msg_private' => false]);
     }
+
+    public function testAdapterRejectsEmptyChannelsUpdate()
+    {
+        $this->mockHttpClientInConnection();
+        $this->assertNull($this->getMercureAdapter()->publish([], 'event'));
+    }
 }
