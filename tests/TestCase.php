@@ -101,4 +101,20 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         return new Mercure($this->getPublisherContract());
     }
+
+    protected function registerNotificationDriver($app)
+    {
+        $this->updateConfiguration('enable_notification', true);
+    }
+
+    protected function registerBroadcastingDriver($app)
+    {
+        $this->updateConfiguration('enable_broadcasting', true);
+    }
+
+    protected function registerMercureConfiguration($app)
+    {
+        $app->config->set(['broadcasting.default' => 'mercure']);
+        $app->config->set(['broadcasting.connections.mercure' => ['driver' => 'mercure',],]);
+    }
 }
