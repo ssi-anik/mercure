@@ -31,8 +31,7 @@ class MercureTest extends TestCase
         ];
 
         $this->mockHttpClientInConnection(function ($method, $url, $options) use ($payload) {
-            $body = $options['body'];
-            parse_str($body, $parts);
+            parse_str($options['body'], $parts);
             $this->assertSame($parts['private'], 'on');
             $this->assertSame((int)$parts['retry'], $payload['__msg_retry']);
             $this->assertSame($parts['id'], $payload['__msg_id']);
@@ -53,8 +52,7 @@ class MercureTest extends TestCase
         ];
 
         $this->mockHttpClientInConnection(function ($method, $url, $options) {
-            $body = $options['body'];
-            parse_str($body, $parts);
+            parse_str($options['body'], $parts);
             $this->assertStringContainsString('_it_will_be', $parts['data']);
             $this->assertStringContainsString('__also_it_will_be', $parts['data']);
             $this->assertStringNotContainsString('__msg_id', $parts['data']);
@@ -72,5 +70,46 @@ class MercureTest extends TestCase
 
         $this->mockHttpClientInConnection();
         $this->assertTrue(is_string($this->getMercureAdapter()->publish(['c1'], '', $payload)));
+    }
+
+    public function testAdapterSendsMessageInEventAndDataFormat()
+    {
+        $payload = [
+            'name' => 'anik/mercure',
+            'role' => 'developer',
+        ];
+
+        $this->mockHttpClientInConnection(function ($method, $url, $options) {
+            parse_str($options['body'], $parts);
+            $msg = json_decode($parts['data'], true);
+            $this->assertArrayHasKey('data', $msg);
+            $this->assertArrayHasKey('event', $msg);
+        });
+        $this->getMercureAdapter()->publish(['c1'], '', $payload);
+    }
+
+    public function testAdapterCanSendsMessageToMultipleTopics()
+    {
+        $this->mockHttpClientInConnection(function ($method, $url, $options) {
+            $this->assertStringContainsString('topic=channel1', $options['body']);
+            $this->assertStringContainsString('topic=channel2', $options['body']);
+        });
+        $this->getMercureAdapter()->publish(['channel1', 'channel2'], 'event', []);
+    }
+
+    public function testAdapterMessageIsPublishedAsPrivate()
+    {
+        $this->mockHttpClientInConnection(function ($method, $url, $options) {
+            $this->assertStringContainsString('private=on', $options['body']);
+        });
+        $this->getMercureAdapter()->publish(['channel'], 'event', []);
+    }
+
+    public function testAdapterCanSendMessageAsPublicIfSpecifiedInPayload()
+    {
+        $this->mockHttpClientInConnection(function ($method, $url, $options) {
+            $this->assertStringNotContainsString('private', $options['body']);
+        });
+        $this->getMercureAdapter()->publish(['channel'], 'event', ['__msg_private' => false]);
     }
 }
