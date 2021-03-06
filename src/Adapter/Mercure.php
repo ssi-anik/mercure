@@ -45,7 +45,7 @@ class Mercure
             'data' => $payload,
         ]);
 
-        ($this->publisher)(new Update($topics, $data, $private, $id, $type, $retry));
+        return ($this->publisher)(new Update($topics, $data, $private, $id, $type, $retry));
     }
 
     /**
