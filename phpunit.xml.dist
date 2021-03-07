@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true"
+<phpunit backupGlobals="false"
+         colors="true"
          bootstrap="tests/bootstrap.php"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
@@ -25,9 +26,13 @@
         <testsuite name="adapter">
             <directory>./tests/Unit/Adapter</directory>
         </testsuite>
+        <testsuite name="integration">
+            <directory>./tests/Integration</directory>
+        </testsuite>
     </testsuites>
     <php>
         <env name="APP_KEY" value="base64:HSWG+rmwH5DUY2ldL8jcV1iPr1QM2ikMQGijY9gDvDw="/>
-        <env name="MERCURE_PUBLISH_JWT" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.OwYVEF9qsVOpHeCx-iBV5jMVl0BVGivm0v8fsJTW5rw"/>
+        <env name="MERCURE_PUBLISH_JWT"
+             value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.OwYVEF9qsVOpHeCx-iBV5jMVl0BVGivm0v8fsJTW5rw"/>
     </php>
 </phpunit>
