@@ -102,12 +102,12 @@ class TestCase extends \Orchestra\Testbench\TestCase
         return new Mercure($this->getPublisherContract());
     }
 
-    protected function registerNotificationDriver($app)
+    protected function enableNotificationDriver($app)
     {
         $this->updateConfiguration('enable_notification', true);
     }
 
-    protected function registerBroadcastingDriver($app)
+    protected function enableBroadcastingDriver($app)
     {
         $this->updateConfiguration('enable_broadcasting', true);
     }
