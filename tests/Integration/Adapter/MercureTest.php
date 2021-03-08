@@ -1,6 +1,6 @@
 <?php
 
-namespace Anik\Mercure\Tests\Unit\Adapter;
+namespace Anik\Mercure\Tests\Integration\Adapter;
 
 use Anik\Mercure\Tests\TestCase;
 use Symfony\Component\HttpClient\Exception\TransportException;
