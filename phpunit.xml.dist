@@ -23,11 +23,11 @@
         <testsuite name="factory">
             <directory>./tests/Unit/Factory</directory>
         </testsuite>
-        <testsuite name="adapter">
-            <directory>./tests/Unit/Adapter</directory>
-        </testsuite>
         <testsuite name="integration">
             <directory>./tests/Integration</directory>
+        </testsuite>
+        <testsuite name="adapter">
+            <directory>./tests/Integration/Adapter</directory>
         </testsuite>
     </testsuites>
     <php>
