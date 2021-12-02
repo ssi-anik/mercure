@@ -22,9 +22,9 @@ class MercureServiceProviderTest extends TestCase
 {
     public function testServiceProviderBindsComponents()
     {
-        $this->assertTrue(app('mercure') instanceof PublisherInterface);
-        $this->assertTrue(app(PublisherInterface::class) instanceof PublisherInterface);
-        $this->assertTrue(app(Publisher::class) instanceof PublisherInterface);
+        $this->assertInstanceOf(PublisherInterface::class, app('mercure'));
+        $this->assertInstanceOf(PublisherInterface::class, app(PublisherInterface::class));
+        $this->assertInstanceOf(PublisherInterface::class, app(Publisher::class));
     }
 
     public function testUsesDefaultConnectionWhenCreatingInstance()
@@ -52,7 +52,7 @@ class MercureServiceProviderTest extends TestCase
      */
     public function testRegistersNotificationDriverThroughEnvironment()
     {
-        $this->assertTrue(app(ChannelManager::class)->driver('mercure') instanceof MercureChannel);
+        $this->assertInstanceOf(MercureChannel::class, app(ChannelManager::class)->driver('mercure'));
     }
 
     /**
@@ -70,13 +70,13 @@ class MercureServiceProviderTest extends TestCase
      */
     public function testRegistersBroadcastingDriverThroughEnvironment()
     {
-        $this->assertTrue(app(BroadcastManager::class)->driver('mercure') instanceof Broadcaster);
+        $this->assertInstanceOf(Broadcaster::class, app(BroadcastManager::class)->driver('mercure'));
     }
 
     public function testBoundMercureChannelShouldReturnItself()
     {
         $channel = app(MercureChannel::class);
-        $this->assertTrue($channel instanceof MercureChannel);
+        $this->assertInstanceOf(MercureChannel::class, $channel);
     }
 
     /**

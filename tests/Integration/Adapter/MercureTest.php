@@ -69,7 +69,7 @@ class MercureTest extends TestCase
         ];
 
         $this->mockHttpClientInConnection();
-        $this->assertTrue(is_string($this->getMercureAdapter()->publish(['c1'], '', $payload)));
+        $this->assertIsString($this->getMercureAdapter()->publish(['c1'], '', $payload));
     }
 
     public function testAdapterSendsMessageInEventAndDataFormat()
