@@ -15,8 +15,8 @@ class PublisherTest extends TestCase
     public function testFactoryShouldReturnPublisherInterface()
     {
         $publisher = Publisher::instance($this->config());
-        $this->assertTrue($publisher instanceof PublisherInterface);
-        $this->assertTrue($publisher instanceof MercurePublisher);
+        $this->assertInstanceOf(PublisherInterface::class, $publisher);
+        $this->assertInstanceOf(MercurePublisher::class, $publisher);
     }
 
     public function testShouldThrowExceptionForNoUrl()
